@@ -5,11 +5,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
     private float spawnRate = 2;
-    private int score;
+    private int _score;
 
     public int Score {
-        get => score;
-        set => score = value;
+        get => _score;
+        set => _score = Mathf.Max(value, 0);
     }
 
     public List<GameObject> targetPrefabs;
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         StartCoroutine(SpawnTarget());
-        score = 0;
+        Score = 0;
         UpdateScore(0);
     }
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <param name="scoreToAdd">Puntos a añadir a la puntuación global</param>
     public void UpdateScore(int scoreToAdd) {
-        score += scoreToAdd;
-        scoreText.text = "Score\n" + score;
+        Score += scoreToAdd;
+        scoreText.text = "Score\n" + Score;
     }
 }

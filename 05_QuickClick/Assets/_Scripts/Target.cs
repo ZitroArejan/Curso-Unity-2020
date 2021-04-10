@@ -5,6 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Target : MonoBehaviour {
+    [Range(-50, 50)]
     public int pointValue;
     private float minForce = 10.5f, maxForce = 14, torque = 1, xRange = 3.5f, ySpawnPos = -1.5f, zSpawnPos = 0.5f;
     
@@ -49,12 +50,15 @@ public class Target : MonoBehaviour {
 
     private void OnMouseDown() {
         Destroy(gameObject);
-        gameManager.UpdateScore(1);
+        gameManager.UpdateScore(pointValue);
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("KillZone")) {
             Destroy(gameObject);
+            if (pointValue > 0) {
+                gameManager.UpdateScore(-pointValue);
+            }
         }
     }
 }
