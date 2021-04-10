@@ -526,13 +526,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9af4cb2bd51bfd468de24315e4cce2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRate: 2
   targetPrefabs:
   - {fileID: 1423594156531927327, guid: ddc171172d87f4446aa56cf70ad145f5, type: 3}
   - {fileID: 2794781436694001327, guid: 968a1adadd4d8a24fbad301d5c4923ed, type: 3}
   - {fileID: 7297338086983491107, guid: c09fb5a2ff8249b49b279c5fbb84bd44, type: 3}
   - {fileID: 5880835660349024381, guid: ff1505096086582439b70545662baf05, type: 3}
   - {fileID: 136473668249748796, guid: 890583ddebf04514ca100575f9618b3e, type: 3}
+  scoreText: {fileID: 1884603380}
 --- !u!4 &659055767
 Transform:
   m_ObjectHideFlags: 0
@@ -899,8 +899,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -90}
-  m_SizeDelta: {x: 384.2307, y: 50}
+  m_AnchoredPosition: {x: 20, y: -60}
+  m_SizeDelta: {x: 384.2307, y: 97.0898}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1884603380
 MonoBehaviour:

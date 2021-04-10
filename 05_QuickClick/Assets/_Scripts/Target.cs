@@ -5,11 +5,14 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Target : MonoBehaviour {
+    public int pointValue;
     private float minForce = 10.5f, maxForce = 14, torque = 1, xRange = 3.5f, ySpawnPos = -1.5f, zSpawnPos = 0.5f;
     
+    private GameManager gameManager;
     private Rigidbody _rigidbody;
     
     void Start() {
+        gameManager = FindObjectOfType<GameManager>();
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.AddForce(RandomForce(), ForceMode.Impulse);
         _rigidbody.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
@@ -46,6 +49,7 @@ public class Target : MonoBehaviour {
 
     private void OnMouseDown() {
         Destroy(gameObject);
+        gameManager.UpdateScore(1);
     }
 
     private void OnTriggerEnter(Collider other) {

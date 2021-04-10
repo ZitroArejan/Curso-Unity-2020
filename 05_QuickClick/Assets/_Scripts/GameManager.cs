@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
-    public float spawnRate;
-    
+    private float spawnRate = 2;
+    private int score;
+
+    public int Score {
+        get => score;
+        set => score = value;
+    }
+
     public List<GameObject> targetPrefabs;
-    
+    public TextMeshProUGUI scoreText;
+
     void Start() {
         StartCoroutine(SpawnTarget());
+        score = 0;
+        UpdateScore(0);
     }
 
     void Update() {
@@ -21,5 +31,14 @@ public class GameManager : MonoBehaviour {
             int index = Random.Range(0, targetPrefabs.Count);
             Instantiate(targetPrefabs[index]);
         }
+    }
+
+    /// <summary>
+    /// Actualiza la puntuación y lo muestra en pantalla
+    /// </summary>
+    /// <param name="scoreToAdd">Puntos a añadir a la puntuación global</param>
+    public void UpdateScore(int scoreToAdd) {
+        score += scoreToAdd;
+        scoreText.text = "Score\n" + score;
     }
 }
