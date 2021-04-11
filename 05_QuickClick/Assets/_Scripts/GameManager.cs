@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
     public enum GameState {
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour {
     public GameState gameState;
     
     private int _score;
-    private float spawnRate = 1;
+    private float spawnRate = 1.8f;
 
     public int Score {
         get => _score;
@@ -25,22 +27,33 @@ public class GameManager : MonoBehaviour {
 
     public List<GameObject> targetPrefabs;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI gameOverText;
-    public Button restartButton;
+    //public TextMeshProUGUI gameOverText;
+    //public Button restartButton;
+    public GameObject titleScreen;
+    public GameObject gameOverScreen;
 
     void Start() {
+        //gameOverText.gameObject.SetActive(false);
+        //restartButton.gameObject.SetActive(false);
+        gameOverScreen.SetActive(false);
+        titleScreen.SetActive(true);
+        scoreText.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Método que inicia la partida y configura la dificultad
+    /// </summary>
+    /// <param name="difficulty">Número entero que indica el grado de dificultad del juego</param>
+    public void StartGame(int difficulty) {
+        titleScreen.SetActive(false);
+        scoreText.gameObject.SetActive(true);
         gameState = GameState.inGame;
+        spawnRate /= difficulty;
         StartCoroutine(SpawnTarget());
         Score = 0;
         UpdateScore(0);
-        gameOverText.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
     }
-
-    void Update() {
-        
-    }
-
+    
     IEnumerator SpawnTarget() {
         while (gameState == GameState.inGame) {
             yield return new WaitForSeconds(spawnRate);
@@ -63,8 +76,9 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public void GameOver() {
         gameState = GameState.gameOver;
-        gameOverText.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
+        //gameOverText.gameObject.SetActive(true);
+        //restartButton.gameObject.SetActive(true);
+        gameOverScreen.SetActive(true);
     }
 
     public void RestartGame() {
