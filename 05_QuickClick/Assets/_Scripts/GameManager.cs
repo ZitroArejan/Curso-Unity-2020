@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Random = UnityEngine.Random;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public enum GameState {
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     public GameState gameState;
     
     private int _score;
-    private float spawnRate = 2;
+    private float spawnRate = 1;
 
     public int Score {
         get => _score;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> targetPrefabs;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
+    public Button restartButton;
 
     void Start() {
         gameState = GameState.inGame;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour {
         Score = 0;
         UpdateScore(0);
         gameOverText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
     }
 
     void Update() {
@@ -62,5 +64,10 @@ public class GameManager : MonoBehaviour {
     public void GameOver() {
         gameState = GameState.gameOver;
         gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
