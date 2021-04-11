@@ -8,7 +8,8 @@ public class Target : MonoBehaviour {
     [Range(-50, 50)]
     public int pointValue;
     private float minForce = 10.5f, maxForce = 14, torque = 1, xRange = 3.5f, ySpawnPos = -1.5f, zSpawnPos = 0.5f;
-    
+
+    public ParticleSystem explosionParticle;
     private GameManager gameManager;
     private Rigidbody _rigidbody;
     
@@ -50,6 +51,7 @@ public class Target : MonoBehaviour {
 
     private void OnMouseDown() {
         Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
         gameManager.UpdateScore(pointValue);
     }
 
