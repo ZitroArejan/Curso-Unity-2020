@@ -527,6 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9af4cb2bd51bfd468de24315e4cce2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 2
   targetPrefabs:
   - {fileID: 1423594156531927327, guid: ddc171172d87f4446aa56cf70ad145f5, type: 3}
   - {fileID: 2794781436694001327, guid: 968a1adadd4d8a24fbad301d5c4923ed, type: 3}
@@ -534,6 +535,7 @@ MonoBehaviour:
   - {fileID: 5880835660349024381, guid: ff1505096086582439b70545662baf05, type: 3}
   - {fileID: 136473668249748796, guid: 890583ddebf04514ca100575f9618b3e, type: 3}
   scoreText: {fileID: 1884603380}
+  gameOverText: {fileID: 1927415908}
 --- !u!4 &659055767
 Transform:
   m_ObjectHideFlags: 0

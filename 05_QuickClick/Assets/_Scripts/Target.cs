@@ -50,16 +50,18 @@ public class Target : MonoBehaviour {
     }
 
     private void OnMouseDown() {
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        gameManager.UpdateScore(pointValue);
+        if (gameManager.gameState == GameManager.GameState.inGame) {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(pointValue);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("KillZone")) {
             Destroy(gameObject);
-            if (pointValue > 0) {
-                gameManager.UpdateScore(-pointValue);
+            if (gameObject.CompareTag("Good")) {
+                gameManager.GameOver();
             }
         }
     }
