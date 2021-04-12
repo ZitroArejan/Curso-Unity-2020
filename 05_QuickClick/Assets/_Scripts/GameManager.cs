@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     
     private int _score;
     private float spawnRate = 1.8f;
+    private const string MAX_SCORE = "MAX_SCORE";
 
     public int Score {
         get => _score;
@@ -27,17 +28,13 @@ public class GameManager : MonoBehaviour {
 
     public List<GameObject> targetPrefabs;
     public TextMeshProUGUI scoreText;
-    //public TextMeshProUGUI gameOverText;
-    //public Button restartButton;
     public GameObject titleScreen;
     public GameObject gameOverScreen;
 
     void Start() {
-        //gameOverText.gameObject.SetActive(false);
-        //restartButton.gameObject.SetActive(false);
         gameOverScreen.SetActive(false);
         titleScreen.SetActive(true);
-        scoreText.gameObject.SetActive(false);
+        ShowMaxScore();
     }
 
     /// <summary>
@@ -72,13 +69,30 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Extrae y muestra la puntuación máxima del juego
+    /// </summary>
+    public void ShowMaxScore() {
+        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        scoreText.text = "Max Score\n" + maxScore;
+    }
+
+    /// <summary>
+    /// Actualiza la puntuación máxima del juego si es superada
+    /// </summary>
+    private void SetMaxScore() {
+        int maxScore = PlayerPrefs.GetInt(MAX_SCORE, 0);
+        if (Score > maxScore) {
+            PlayerPrefs.SetInt(MAX_SCORE, Score);
+        }
+    }
+
+    /// <summary>
     /// Lanza el evento Game Over del juego
     /// </summary>
     public void GameOver() {
         gameState = GameState.gameOver;
-        //gameOverText.gameObject.SetActive(true);
-        //restartButton.gameObject.SetActive(true);
         gameOverScreen.SetActive(true);
+        SetMaxScore();
     }
 
     public void RestartGame() {
