@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public GameState gameState;
     
     private int _score;
+    private int numberOfLives = 4;
     private float spawnRate = 1.8f;
     private const string MAX_SCORE = "MAX_SCORE";
 
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public List<GameObject> targetPrefabs;
+    public List<GameObject> lives;
     public TextMeshProUGUI scoreText;
     public GameObject titleScreen;
     public GameObject gameOverScreen;
@@ -46,6 +48,10 @@ public class GameManager : MonoBehaviour {
         scoreText.gameObject.SetActive(true);
         gameState = GameState.inGame;
         spawnRate /= difficulty;
+        numberOfLives -= difficulty - 1;
+        for (int i = 0; i < numberOfLives; i++) {
+            lives[i].SetActive(true);
+        }
         StartCoroutine(SpawnTarget());
         Score = 0;
         UpdateScore(0);
@@ -90,9 +96,18 @@ public class GameManager : MonoBehaviour {
     /// Lanza el evento Game Over del juego
     /// </summary>
     public void GameOver() {
-        gameState = GameState.gameOver;
-        gameOverScreen.SetActive(true);
-        SetMaxScore();
+        numberOfLives--;
+        if (numberOfLives >= 0) {
+            Image heartImage = lives[numberOfLives].GetComponent<Image>();
+            var tempColor = heartImage.color;
+            tempColor.a = 0.2f;
+            heartImage.color = tempColor;
+        }
+        if (numberOfLives <= 0) {
+            gameState = GameState.gameOver;
+            gameOverScreen.SetActive(true);
+            SetMaxScore();
+        }
     }
 
     public void RestartGame() {
