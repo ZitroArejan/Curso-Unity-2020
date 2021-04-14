@@ -184,3 +184,4 @@ Received Import Request.
 Start importing Assets/Course Library/_Source_Files/Textures using Guid(ae9b7b5b6dddb4009817f870c10d2d26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7354ca8d3c802df7253861ac98aab51f') in 0.009757 seconds
   Import took 0.014300 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
