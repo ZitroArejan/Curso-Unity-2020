@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.John Lemon.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../:\Users\LuisI\OneDrive\Documentos\Unity\Curso-Unity-2020\John Lemon\.idea\.idea.John Lemon\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
