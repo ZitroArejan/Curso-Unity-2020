@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float turnSpeed;
     private const string IS_WALKING = "IsWalking";
+    private const string SPEED_MULTIPLIER = "SpeedMultiplier";
     
     private Vector3 movement;
     private Quaternion rotation = Quaternion.identity;
@@ -17,6 +18,14 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+    }
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            _animator.SetFloat(SPEED_MULTIPLIER, 1.5f);
+        } else {
+            _animator.SetFloat(SPEED_MULTIPLIER, 1);
+        }
     }
 
     void FixedUpdate() {
