@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody _rigidbody;
     private Animator _animator;
+    private AudioSource _audioSource;
 
     void Start() {
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -38,6 +40,14 @@ public class PlayerController : MonoBehaviour {
         bool hasVerticalInput = !Mathf.Approximately(verticalInput, 0);
         bool hasHorizontalInput = !Mathf.Approximately(horizontalInput, 0);
         bool isWalking = hasVerticalInput || hasHorizontalInput;
+
+        if (isWalking) {
+            if (!_audioSource.isPlaying) {
+                _audioSource.Play();
+            }
+        } else {
+            _audioSource.Stop();
+        }
         
         _animator.SetBool(IS_WALKING, isWalking);
         Vector3 desiredFoward = Vector3.RotateTowards(transform.forward, movement,
