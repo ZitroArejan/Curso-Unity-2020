@@ -1,3 +1,7 @@
+#if UNITY_ANDROID || UNITY_IOS
+    #define USING_MOBILE
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,8 +35,18 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
+        #if USING_MOBILE
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            if (Input.touchCount > 0) {
+                horizontalInput = Input.touches[0].deltaPosition.x;
+                verticalInput = Input.touches[0].deltaPosition.y;
+            }
+        #else
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+        #endif
+        
         
         movement.Set(horizontalInput, 0, verticalInput);
         movement.Normalize();
